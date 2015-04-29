@@ -367,6 +367,17 @@ public interface WxMpService {
 
   /**
    * <pre>
+   *   发送模板消息
+   *   详情请见: http://mp.weixin.qq.com/wiki/index.php?title=模板消息接口
+   * </pre>
+   * @param jsonContent
+   * @return
+   * @throws WxErrorException
+   */
+  public String templateSend(String jsonContent) throws WxErrorException;
+
+  /**
+   * <pre>
    * 语义查询接口
    * 详情请见：http://mp.weixin.qq.com/wiki/index.php?title=语义理解
    * </pre>

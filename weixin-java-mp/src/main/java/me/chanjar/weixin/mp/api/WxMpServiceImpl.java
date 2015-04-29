@@ -355,6 +355,14 @@ public class WxMpServiceImpl implements WxMpService {
     return tmpJsonElement.getAsJsonObject().get("msgid").getAsString();
   }
 
+  @Override
+  public String templateSend(String jsonContent) throws WxErrorException {
+    String url = "https://api.weixin.qq.com/cgi-bin/message/template/send";
+    String responseContent = execute(new SimplePostRequestExecutor(), url, jsonContent);
+    JsonElement tmpJsonElement = Streams.parse(new JsonReader(new StringReader(responseContent)));
+    return tmpJsonElement.getAsJsonObject().get("msgid").getAsString();
+  }
+
   public WxMpSemanticQueryResult semanticQuery(WxMpSemanticQuery semanticQuery) throws WxErrorException {
     String url = "https://api.weixin.qq.com/semantic/semproxy/search";
     String responseContent = execute(new SimplePostRequestExecutor(), url, semanticQuery.toJson());
