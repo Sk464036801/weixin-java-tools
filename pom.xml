@@ -38,12 +38,15 @@
   </modules>
 
   <properties>
+    <maven.compiler.source>1.6</maven.compiler.source>
+    <maven.compiler.target>1.6</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <downloadJavadocs>true</downloadJavadocs>
     <downloadSources>true</downloadSources>
     <httpclient.version>4.3.5</httpclient.version>
     <slf4j.version>1.7.10</slf4j.version>
     <logback.version>1.1.2</logback.version>
+    <skip_test>true</skip_test>
   </properties>
 
   <dependencies>
@@ -126,7 +129,7 @@
     </dependencies>
   </dependencyManagement>
 
-  <distributionManagement>
+  <!--<distributionManagement>
     <snapshotRepository>
       <id>ossrh</id>
       <url>https://oss.sonatype.org/content/repositories/snapshots</url>
@@ -135,6 +138,18 @@
       <id>ossrh</id>
       <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
+  </distributionManagement>-->
+
+  <distributionManagement>
+    <!-- 两个ID必须与 setting.xml中的<server><id>nexus-releases</id></server>保持一致-->
+    <repository>
+      <id>welink-repo</id>
+      <url>http://welink.io:8081/nexus/content/repositories/welink-repo</url>
+    </repository>
+    <snapshotRepository>
+      <id>snapshots</id>
+      <url>http://welink.io:8081/nexus/content/repositories/snapshots</url>
+    </snapshotRepository>
   </distributionManagement>
 
   <profiles>
@@ -202,7 +217,7 @@
       </plugins>
     </pluginManagement>
 
-    <plugins>
+    <!--<plugins>
       <plugin>
         <groupId>org.sonatype.plugins</groupId>
         <artifactId>nexus-staging-maven-plugin</artifactId>
@@ -225,7 +240,7 @@
           <goals>deploy</goals>
         </configuration>
       </plugin>
-    </plugins>
+    </plugins>-->
   </build>
 
 

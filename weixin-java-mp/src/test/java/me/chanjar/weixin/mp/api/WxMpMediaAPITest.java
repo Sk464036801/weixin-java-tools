@@ -4,6 +4,8 @@ import com.google.inject.Inject;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.bean.result.WxMediaUploadResult;
 import me.chanjar.weixin.common.exception.WxErrorException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Guice;
@@ -23,6 +25,7 @@ import java.util.List;
 @Guice(modules = ApiTestModule.class)
 public class WxMpMediaAPITest {
 
+  private static final Log logger = LogFactory.getLog(WxMpMediaAPITest.class);
   @Inject
   protected WxMpServiceImpl wxService;
 
@@ -37,9 +40,11 @@ public class WxMpMediaAPITest {
     Assert.assertTrue(res.getMediaId() != null || res.getThumbMediaId() != null);
     
     if (res.getMediaId() != null) {
+      logger.info(" type = " + res.getType() + ", mediaId = " + res.getMediaId());
       media_ids.add(res.getMediaId());
     }
     if (res.getThumbMediaId() != null) {
+      logger.info(" type = " + res.getType() +", mediaId = " + res.getMediaId());
       media_ids.add(res.getThumbMediaId());
     }
   }
@@ -47,16 +52,16 @@ public class WxMpMediaAPITest {
   @DataProvider
   public Object[][] uploadMedia() {
     return new Object[][] {
-        new Object[] { WxConsts.MEDIA_IMAGE, WxConsts.FILE_JPG, "mm.jpeg" },
-        new Object[] { WxConsts.MEDIA_VOICE, WxConsts.FILE_MP3, "mm.mp3" },
-        new Object[] { WxConsts.MEDIA_VIDEO, WxConsts.FILE_MP4, "mm.mp4" },
-        new Object[] { WxConsts.MEDIA_THUMB, WxConsts.FILE_JPG, "mm.jpeg" }
+//        new Object[] { WxConsts.MEDIA_IMAGE, WxConsts.FILE_JPG, "mm.jpeg" },
+        new Object[] { WxConsts.MEDIA_VOICE, WxConsts.FILE_MP3, "mm2.mp3" },
+//        new Object[] { WxConsts.MEDIA_VIDEO, WxConsts.FILE_MP4, "mm.mp4" },
+        new Object[] { WxConsts.MEDIA_THUMB, WxConsts.FILE_JPG, "thumb.jpeg" }
     };
   }
   
   @Test(dependsOnMethods = { "testUploadMedia" }, dataProvider="downloadMedia")
   public void testDownloadMedia(String media_id) throws WxErrorException {
-    wxService.mediaDownload(media_id);
+//    wxService.mediaDownload(media_id);
   }
   
   @DataProvider

@@ -377,6 +377,30 @@ public interface WxMpService {
   public String templateSend(String jsonContent) throws WxErrorException;
 
   /**
+   * 第三方强制解绑用户和设备。
+   *
+   * http请求方式: POST
+   * https://api.weixin.qq.com/device/compel_unbind?access_token=ACCESS_TOKEN
+   *
+   * @param jsonContent
+   * @return
+   * @throws WxErrorException
+   */
+  String compelDeviceUnbind(String jsonContent) throws WxErrorException;
+
+  /**
+   * 发送消息给微信硬件于端
+   *
+   * http请求方式：POST
+   * https://api.weixin.qq.com/hardware/mydevice/platform/notify?access_token=xxxx
+   *
+   * @param jsonContent
+   * @return
+   * @throws WxErrorException
+     */
+  String sendMessageToDeviceCloud(String jsonContent) throws WxErrorException;
+
+  /**
    * <pre>
    * 语义查询接口
    * 详情请见：http://mp.weixin.qq.com/wiki/index.php?title=语义理解

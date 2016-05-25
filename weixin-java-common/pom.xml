@@ -65,6 +65,7 @@
           <suiteXmlFiles>
             <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
           </suiteXmlFiles>
+          <skipTests>${skip_test}</skipTests>
         </configuration>
       </plugin>
     </plugins>

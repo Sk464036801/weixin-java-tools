@@ -360,7 +360,23 @@ public class WxMpServiceImpl implements WxMpService {
     String url = "https://api.weixin.qq.com/cgi-bin/message/template/send";
     String responseContent = execute(new SimplePostRequestExecutor(), url, jsonContent);
     JsonElement tmpJsonElement = Streams.parse(new JsonReader(new StringReader(responseContent)));
-    return tmpJsonElement.getAsJsonObject().get("msgid").getAsString();
+    return tmpJsonElement.getAsJsonObject().get("msgid").toString();
+  }
+
+  @Override
+  public String compelDeviceUnbind(String jsonContent) throws WxErrorException {
+    String url = "https://api.weixin.qq.com/device/compel_unbind";
+    String responseContent = execute(new SimplePostRequestExecutor(), url, jsonContent);
+    JsonElement tmpJsonElement = Streams.parse(new JsonReader(new StringReader(responseContent)));
+    return tmpJsonElement.getAsJsonObject().get("base_resp").toString();
+  }
+
+  @Override
+  public String sendMessageToDeviceCloud(String jsonContent) throws WxErrorException {
+    String url = "https://api.weixin.qq.com/hardware/mydevice/platform/notify";
+    String responseContent = execute(new SimplePostRequestExecutor(), url, jsonContent);
+    JsonElement tmpJsonElement = Streams.parse(new JsonReader(new StringReader(responseContent)));
+    return tmpJsonElement.getAsJsonObject().toString();
   }
 
   public WxMpSemanticQueryResult semanticQuery(WxMpSemanticQuery semanticQuery) throws WxErrorException {
